@@ -2,13 +2,15 @@ from django.conf.urls import url
 
 from . import views
 
+app = "comics"
+# urlpatterns = [
+#     # ex: /comic/,
+#
+#     url(r'^$', views.IndexView.as_view(), name='index'),
+#     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+# ]
+
 urlpatterns = [
-    # ex: /polls/
     url(r'^$', views.index, name='index'),
-    # ex: /polls/5/
-    url(r'^(?P<people_id>[0-9]+)/$', views.detail, name='detail'),
-    # ex: /polls/5/results/
-    url(r'^(?P<people_id>[0-9]+)/results/$', views.results, name='results'),
-    # ex: /polls/5/vote/
-    url(r'^(?P<people_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    url(r'^(?P<comic_id>[0-9]+)/$', views.detail, name='detail'),
 ]

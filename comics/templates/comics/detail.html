@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>comic.series</title>
+    </head>
+
+    <body>
+    <ul>
+        {% for name, value in comic.get_fields %}
+            {% if value %}
+                {{ name }} : {{ value }}
+
+
+
+            {% else %}
+                <strong>There are no comics present.</strong>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    </body>
+</html>

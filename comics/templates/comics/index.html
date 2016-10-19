@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+  {% block content %}
+  <h1>Comics!</h1>
+
+  <ul class="list-group">
+    {% for item in comic %}
+    <li class="list-group-item">{{ comic.series }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
