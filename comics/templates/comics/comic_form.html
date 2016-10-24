@@ -1,0 +1,12 @@
+
+<form action="/comics/add/" method="post">
+    {% csrf_token %}
+    {{ form }}
+<input type="submit" value="Search">
+<br>
+<br>
+<div class="form-group">
+<label for="exampleInputFile">File input</label>
+<input type="file" id="exampleInputFile">
+</div>
+</form>

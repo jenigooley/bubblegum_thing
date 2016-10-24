@@ -1,43 +1,97 @@
+import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpRequest
 from django.template import loader, Context
-from .models import Comic
+from .models import Comic, People, Publisher
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
-
-def index(request):
-    latest_comics_list = Comic.objects.order_by('-cover_date')[:5]
-    print latest_comics_list
-    template = loader.get_template('comics/index.html')
-    context = Context({'latest_comics_list': latest_comics_list, })
-    return HttpResponse(template.render(context))
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .forms import NewComicForm
+import comic_vine_api
+import pprint
 
 
-def detail(request, comic_id):
+class IndexView(generic.ListView):
+    template_name = 'comics/index.html'
+    context_object_name = 'latest_comic_list'
 
-    # try:
-    #     comic = get_object_or_404(Comic, pk=comic_id)
-    #     #comic = comic.objects.order_by('cover_date')
-    #     template = loader.get_template('comics/detail.html')
-    #     context = Context({'comic': comic})
-    #     return HttpResponse(template.render(context))
-    # except (KeyError, Comic.DoesNotExist):
-    #     # Redisplay the question voting form.
-    #     return render(request, 'comics/detail.html',
-    #                   {'comic': comic,'error_message': "Invalid.", })
-    # else:
-    #     return render('comics/detail.html', {'comic': comic})
-
-    class IndexView(generic.ListView):
-        template_name = 'comics/index.html'
-        context_object_name = 'latest_comic_list'
-
-        def get_queryset(self):
-            """Return the last five published questions."""
-            return Comic.objects.order_by('-cover_date')[:5]
+    def get_queryset(self):
+        """Return the last five published questions."""
+        return Comic.objects.order_by('-cover_date')[:5]
 
 
-    class DetailView(generic.DetailView):
-        model = Comic
-        template_name = 'comics/detail.html'
+class DetailView(generic.DetailView):
+    model = Comic
+    template_name = 'comics/detail.html'
+
+
+class ComicAdd(CreateView):
+    model = Comic
+    fields = ['series', 'issue_title', 'issue_number']
+
+    def form_valid(self, form):
+        new_pub = {}
+        new_peeps = {}
+        if form.is_valid():
+            data = form.cleaned_data
+            add_one = comic_vine_api.main(data)
+            org_result = {k: v for k, v in add_one.items()}
+            if add_one.get('publisher'):
+                try:
+                    new_pub['publisher'] = add_one['publisher']
+                    del add_one['publisher']
+                    new_publisher = Publisher(** new_pub)
+                    new_publisher.save()
+                    pprint.pprint(add_one)
+                except:
+                    pass
+
+                for k in ['writer', 'artist', 'letterer']:
+                    try:
+                        if add_one.get('writer'):
+                            new_peeps['name'] = add_one['writer']
+                            new_peeps['role'] = 'writer'
+                            del add_one['writer']
+                        if add_one.get('artist'):
+                            new_peeps['name'] = add_one['artist']
+                            new_peeps['role'] = 'artist'
+                            del add_one['artist']
+                        if add_one.get('letterer'):
+                            new_peeps['name'] = add_one['letterer']
+                            new_peeps['role'] = 'letterer'
+                            del add_one['letterer']
+
+                        new_people = People(**new_peeps)
+                        new_people.save()
+                    except:
+                        pass
+            people_art = People.objects.filter(name=org_result['artist']).first()
+            people_write = People.objects.filter(name=org_result['writer']).first()
+            people_letter = People.objects.filter(name=org_result['letterer']).first()
+
+            if not people_art:
+                people_art = People.objects.create(name=org_result['artist'])
+            if not people_write:
+                people_write = People.objects.create(name=org_result['writer'])
+            if not people_letter:
+                people_letter = People.objects.create(name=org_result['letterer'])
+
+            publisher = Publisher.objects.filter(publisher=org_result['publisher']).first()
+            if not publisher:
+                publisher = Publisher.objects.create(publisher=org_result['publisher']).first()
+            new_comic = Comic(artist=people_art, writer=people_write, letterer=people_letter, publisher=publisher, **add_one)
+            new_comic.cover_date = datetime.datetime.strptime(org_result['cover_date'], '%Y-%m-%d')
+            new_comic.save()
+            return HttpResponseRedirect('/thanks/')
+
+
+class ComicUpdate(UpdateView):
+    model = Comic
+    fields = ['name']
+
+
+class ComicDelete(DeleteView):
+    model = Comic
+    success_url = reverse_lazy('comic-list')
