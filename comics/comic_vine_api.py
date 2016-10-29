@@ -16,8 +16,8 @@ def call_api(series, issue_title):
 }
     r = requests.get('http://comicvine.gamespot.com/api/search/',
                      headers=headers, params=payload)
-
     results = r.json()['results']
+    pprint.pprint(results)
     return results
 
 
@@ -47,7 +47,6 @@ def get_issue_persons(issue_url):
                 }
 
     r = requests.get(issue_url, headers=headers, params=payload)
-    pprint.pprint(r)
     return r.json()
 
 def get_creater_credit(persons):
@@ -55,19 +54,27 @@ def get_creater_credit(persons):
             for i in persons['results']['person_credits']}
 
 
-def narrow_results(issue_stats):
+def narrow_results(issue_stats, issue_number):
     narrow_stats = {
+                    'issue_number': issue_number,
                     'cover_date': issue_stats['cover_date'],
-                    'cover_art': issue_stats['image'],
-                    'letterer': issue_stats['letterer'],
+                    'cover_art': issue_stats['image']['super_url'],
                     'writer': issue_stats['writer'],
                     'publisher': 'Image',
                     'series': issue_stats['volume']['name'],
                     'issue_title': issue_stats['name'],
-                    'description': issue_stats['description'],
+                    'description': (issue_stats['description']).strip('p><i></i></p>')
     }
+    if issue_stats.has_key('letterer'):
+        narrow_stats['letterer'] = issue_stats['letterer']
+    elif issue_stats.has_key('letterer, other'):
+        narrow_stats['letterer'] = issue_stats['letterer, other']
+    else:
+        narrow_stats['letterer'] = ' '
     if issue_stats.has_key('artist, colorist, cover'):
         narrow_stats['artist'] = issue_stats['artist, colorist, cover']
+    elif issue_stats.has_key('artist, cover, other'):
+        narrow_stats['artist'] = ['artist, cover, other']
     elif issue_stats.has_key('artist, cover'):
         narrow_stats['artist'] = issue_stats['artist, cover']
     elif issue_stats.has_key('artist, colorist'):
@@ -81,9 +88,6 @@ def narrow_results(issue_stats):
 
 def main(data):
     issue_stats = {}
-    # series = data[0]['series']
-    # print series
-    # issue_title = data[0]['issue_title']
     results = call_api(data['series'], data['issue_title'])
     issue = get_issue(results, data['issue_number'])
     issue_url = get_api_detail_url(issue)
@@ -92,7 +96,7 @@ def main(data):
     issue_stats.update(issue)
     issue_stats.update(credit)
     pprint.pprint(issue_stats)
-    narrow = narrow_results(issue_stats)
+    narrow = narrow_results(issue_stats, data['issue_number'])
     return narrow
 
 if __name__ == '__main__':

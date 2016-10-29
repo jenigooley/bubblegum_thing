@@ -1,22 +1,86 @@
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
-    <head>
-        <title>comic.series</title>
-    </head>
+{% csrf_token %}
+<!-- <head>
+<link rel="stylesheet" type="text/css" href="comic_detail.css">
+</head> -->
+<style>
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row-reverse;;
+    text-align: center;
+}
 
-    <body>
-    <ul>
-        {% for name, value in comic.get_fields %}
-            {% if value %}
+.flex-container * {
+    padding: 0px;
+    -webkit-flex: 1 100%;
+    flex: 1 100%;
+}
+
+
+#outer_box {
+        left:0px;
+        text-align: center;
+        width: 1000px;
+        background-color: #98ff98;
+        position: relative;
+}
+
+.image {
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: aquamarine;
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.detail {
+    padding: 0;
+    margin: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: aquamarine;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: b
+
+}
+
+header {background-color:lavander;}
+footer {background-color:lavander;}
+</style>
+<body>
+<header>
+    <h1>{{comic.series}}</h1>
+    <h2> {{comic.issue_number}}
+</header>
+
+<div class="flex-container">
+
+    <div class="detail">
+        <ul>
+            {% for name, value in comic.get_fields %}
                 {{ name }} : {{ value }}
 
+            {% endfor %}
 
+        </ul>
+    </div>
 
-            {% else %}
-                <strong>There are no comics present.</strong>
-            {% endif %}
-        {% endfor %}
-    </ul>
+    <div class="image">
+        <img src={{comic.cover_art}} alt="Cover Art Not Found">
+    </div>
+</div>
 
-    </body>
+<footer>boop</footer>
+<!-- </div> -->
+
+</body>
 </html>
