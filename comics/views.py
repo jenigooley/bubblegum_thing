@@ -2,7 +2,7 @@ import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpRequest
 from django.template import loader, Context
-from .models import Comic, People, Publisher
+from .models import Comic, People, Publisher, UserComic
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
@@ -27,33 +27,23 @@ class DetailView(generic.DetailView):
     queryset = Comic.objects.all()
 
 
-# class AddView(FormView):
-#     template_name = 'comic_form.html'
-#     form_class = NewComicForm
-#     # success_url = '/thanks/'
-
-
 class ComicAdd(CreateView):
 
     model = Comic
-    fields = ['series', 'issue_title',
-              'first_issue', 'last_issue',
-              'notes']
+    form_class = NewComicForm
 
     def form_valid(self, form):
         new_pub = {}
         new_peeps = {}
         if form.is_valid():
-            self.first = data['first_issue']
-            self.last = data['last_issue']
-            del form.first_issue
-            del form.last_issue
-            self.data = form.cleaned_data
-            return self.data
+            data = form.cleaned_data
+            first = data['first_issue']
+            last = data['last_issue'] + 1
+            del data['first_issue']
+            del data['last_issue']
 
-    def input_range(self):
-        for num in range(self.first, self.last):
-            add_one = comic_vine_api.main(self.data)
+        for num in range(first, last):
+            add_one = comic_vine_api.main(data, num)
             org_result = {k: v for k, v in add_one.items()}
             if add_one.get('publisher'):
                 try:
@@ -88,6 +78,7 @@ class ComicAdd(CreateView):
             people_write = People.objects.filter(name=org_result['writer']).first()
             people_letter = People.objects.filter(name=org_result['letterer']).first()
 
+
             if not people_art:
                 people_art = People.objects.create(name=org_result['artist'])
             if not people_write:
@@ -99,12 +90,16 @@ class ComicAdd(CreateView):
             if not publisher:
                 publisher = Publisher.objects.create(publisher=org_result['publisher']).first()
             new_comic = Comic(artist=people_art, writer=people_write, letterer=people_letter,
-                publisher=publisher, **add_one)
+                              publisher=publisher, **add_one)
             #import pdb; pdb.set_trace()
             new_comic.cover_date = datetime.datetime.strptime(org_result['cover_date'], '%Y-%m-%d')
             new_comic.save()
+            print ('ID', new_comic.id)
+            print (self.request.user.id)
+            user_comic = UserComic.objects.create(comic_issue=new_comic, user_id=self.request.user)
+            user_comic.save()
             #import pdb; pdb.set_trace()
-            return HttpResponseRedirect('/comic-detail')
+        return HttpResponseRedirect('/comic-detail')
 
 
 class ComicUpdate(UpdateView):
