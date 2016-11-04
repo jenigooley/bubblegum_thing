@@ -1,0 +1,9 @@
+.logged-in {
+    background-color: : pink;
+}
+.logged-out {
+    background-color: aquamarine;
+}
+.pull-right {
+    float:right;
+}

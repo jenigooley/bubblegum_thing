@@ -24,13 +24,23 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Comic
     template_name = 'comics/detail.html'
-    queryset = Comic.objects.all()
+
+    def get_queryset(self):
+
+        return UserComic.get_collection_images(self.request.user.id)
+
+
 
 
 class ComicAdd(CreateView):
 
     model = Comic
     form_class = NewComicForm
+    template_name = 'comics/comic_form.html'
+
+    def get_queryset(self):
+        print list(UserComic.get_collection_data(self.request.user.id))
+        return list(UserComic.get_collection_data(self.request.user.id))
 
     def form_valid(self, form):
         new_pub = {}
@@ -92,14 +102,17 @@ class ComicAdd(CreateView):
             new_comic = Comic(artist=people_art, writer=people_write, letterer=people_letter,
                               publisher=publisher, **add_one)
             #import pdb; pdb.set_trace()
-            new_comic.cover_date = datetime.datetime.strptime(org_result['cover_date'], '%Y-%m-%d')
+            if org_result['cover_date'] != ' ':
+                new_comic.cover_date = datetime.datetime.strptime(org_result['cover_date'], '%Y-%m-%d')
+            else:
+                continue
             new_comic.save()
             print ('ID', new_comic.id)
             print (self.request.user.id)
-            user_comic = UserComic.objects.create(comic_issue=new_comic, user_id=self.request.user)
+            user_comic = UserComic.objects.create(comic_issue=new_comic, user_id=self.request.user.id)
             user_comic.save()
             #import pdb; pdb.set_trace()
-        return HttpResponseRedirect('/comic-detail')
+        return HttpResponseRedirect('/comics/add')
 
 
 class ComicUpdate(UpdateView):

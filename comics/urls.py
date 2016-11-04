@@ -7,7 +7,7 @@ urlpatterns = [
     # ex: /comic/,
 
     url(r'^$', views.IndexView.as_view(), name='index'),
-    url(r'^(?P<pk>[0-9]+)/detail/x  $', views.DetailView.as_view(), name='comic-detail'),
+    url(r'^(?P<pk>[0-9]+)/detail/$', views.DetailView.as_view(), name='comic-detail'),
     url(r'^(add+)/$', views.ComicAdd.as_view(), name='comic-add'),
     url(r'^(?P<pk>[0-9]+)/$', views.ComicUpdate.as_view(), name='comic-update'),
     url(r'^(?P<pk>[0-9]+)/delete/$', views.ComicDelete.as_view(), name='comic-delete'),

@@ -57,12 +57,13 @@ class Publisher(models.Model):
 
 class UserComic(models.Model):
     comic_issue = models.ForeignKey('Comic', related_name='usercomic')
-    user_id = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
 
-    def get_collection_images(self):
+    @classmethod
+    def get_collection_data(self, user):
         '''get all images from each comic_issue'''
-        comic_covers = models.Comic.objects.filter(cover_art).filter(UserComic.comic_issue)all()
-
+        comic_data = UserComic.objects.filter(user=user).all()
+        return comic_data
 
     def get_absolute_url(self):
         return reverse('UserComics-detail', kwargs={'pk': self.pk})

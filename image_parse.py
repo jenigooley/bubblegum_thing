@@ -1,6 +1,6 @@
 import Image
 import pytesseract
-pic = Image.open('comics/IMG_1376 2.JPG')
+pic = Image.open('IMG_1385.JPG')
 print pic.size, pic.im
 pic.load()
 pic.split()
