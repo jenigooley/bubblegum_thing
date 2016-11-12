@@ -3,7 +3,7 @@ import pprint
 import json
 
 
-def call_api(series, issue_title, issue_number):
+def call_api(series, issue_number):
     headers = {
         'User-Agent': 'Chrome/53.0.2785.116',
         'From': 'jeni.gooley.42@gmail.com'
@@ -13,7 +13,7 @@ def call_api(series, issue_title, issue_number):
     payload = {
                 'format': 'json',
                'api_key': '146a6f54ec76f2792d20444c54a16a0dcdb7b48b',
-               'query': '"' + series + ' ' + issue_title + ' ' + issue_number + '"',
+               'query': '"' + series + ' ' + issue_number + '"',
                'resources': 'issue, publisher, person'
 }
     r = requests.get('http://comicvine.gamespot.com/api/search/',
@@ -70,7 +70,6 @@ def narrow_results(issue_stats, issue_number):
                     'cover_date': issue_stats['cover_date'],
                     'cover_art': issue_stats['image']['small_url'],
                     'series': issue_stats['volume']['name'],
-                    'issue_title': issue_stats['name']
                     }
 
     if issue_stats.has_key('description') and issue_stats['description'] is not None:
@@ -116,7 +115,7 @@ def narrow_results(issue_stats, issue_number):
 def main(data, issue_number):
     issue_stats = {}
     issue_number = str(issue_number)
-    results = call_api(data['series'], data['issue_title'], issue_number)
+    results = call_api(data['series'], issue_number)
     issue = get_issue(results, issue_number)
     issue_url = get_api_detail_url(issue)
     persons = get_issue_persons(issue_url)

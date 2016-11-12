@@ -2,19 +2,48 @@
 <html>
 <head>
 <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 <title>{% if request.user.is_authenticated %}Logged In{% else %}Not Logged In{% endif %}</title>
     {% csrf_token %}
     {% load staticfiles %}
         <style>
+	
+	      body {
+                margin:0px;
+                padding:0px;
+                border:0px
+            }
+
             .login-body {
-                font-family: 'Inconsolata', monospace;
-                background-color: plum;
+                font-family: 'Noto Sans', sans-serif;
+                background-color:#EEE0E5;
             }
 
             .pull-right {
                 float:right;
-                font-family: 'Inconsolata', monospace;
+                font-family: 'Noto Sans', sans-serif;
             }
+		
+		 .formbox {
+                display:inline-flex;;
+                flex-direction: row;
+                flex-flow: row;
+                border-radius: 25px;
+                margin:30px;
+                font-family: 'Noto Sans', sans-serif;
+
+            }
+		input{
+                background-color:gainsboro;
+                text-align: center;
+                padding: 10px;
+                border-radius: 2px;
+                width: 40;
+                margin: 8px 0;
+                box-sizing: border-box;
+                font-family: 'Noto Sans', sans-serif;
+                }
+
 
             .flex-container {
                 display: -webkit-flex;
@@ -23,7 +52,7 @@
                 -webkit-flex-direction: row;
                 flex-direction: row;;
                 text-align: center;
-                font-family: 'Inconsolata', monospace;
+                font-family: 'Noto Sans', sans-serif;
                 padding: 0px;
                 -webkit-flex: 1 100%;
                 flex: 1 100%;
@@ -96,7 +125,7 @@
                 left: 0;
                 padding: .5rem;
                 text-align: center;
-                font-family: 'Inconsolata', monospace;
+                font-family:;
 
             }
                 .image_box {
@@ -160,15 +189,18 @@
 
 <body class = "{% if request.user.is_authenticated %}login-body{% else %}logged-out{% endif %}">
 
+<header>
     {% if request.user.is_authenticated %}
         <a href="/accounts/logout/" class="pull-right">Logout</a>
         {{ request.user.username }}
-
     {% if request.user.profile.account_verified %} (verified) {% else %} (unverified) {% endif %}
-    <div>
+</header>    
+    <div class=formbox>
         <form action="/comics/add/" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <input type="text" placeholder="series">
+        <input type="text" placeholder="first issue">
+        <input type="text" placeholder="last issue">
         <input type="submit" value="Search">
         <br>
         <br>
@@ -177,7 +209,7 @@
     <input type="file" id="exampleInputFile">
     </div> -->
         </form>
-
+    </div>
         <div class="flex-container">
 
             <!-- <div id='outer_box'> -->
