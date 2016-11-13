@@ -8,7 +8,7 @@ class NewComicForm(forms.ModelForm):
     last_issue = forms.IntegerField(label='last issue number')
 
     class Meta:
-        fields = ['series', 'issue_title', 'notes']
+        fields = ['series']
         model = Comic
 
 # class manuel_comic_entry(forms.ModelForm):

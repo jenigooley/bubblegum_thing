@@ -19,7 +19,6 @@ class Comic(models.Model):
     letterer = models.ForeignKey('People', related_name='lettererpeople')
     publisher = models.ForeignKey('Publisher', max_length=200)
     cover_date = models.DateField('date published')
-    notes = models.CharField(max_length=1000, null=True, blank=True)
 
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Comic._meta.fields]
