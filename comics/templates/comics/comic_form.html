@@ -60,11 +60,11 @@
 
 		 .formbox {
                 display: flex;
-                align-items: flex-start;
+
+              justify-content: center;;
+                text-align: center;
                 border-radius: 25px;
                 margin:30px;
-
-
             }
 
             input{
@@ -75,19 +75,7 @@
                 border-bottom: solid 3px #c9c9c9;
                 transition: bottom-border 0.3s;
             }
-/*
-            input[type="number"]{
-                padding: 10px;
-                background-color: transparent;
-                border: none;
-                border-bottom: : solid 3px #c9c9c9;
-                transition: border 0.3s;
-            }
 
-            input[type="number"]:focus,
-            input[type="number"].focus {
-                border-bottom: : solid 5px #8B7B8B;
-            }*/
 
             input[type="submit"]{
                  padding: 10px;
@@ -235,18 +223,12 @@
         {% csrf_token %}
 
         <div>
-        <label for="{{ form.series.id_for_label }}">series</label>
         {{ form.series }}
-        </div>
-        <div>
-         <label for="{{ form.first_issue.id_for_label }}">first issue</label>
+
         {{ form.first_issue }}
-        </div>
-        <div>
-        <label for="{{ form.last_issue.id_for_label }}">last issue</label>
+
         {{form.last_issue }}
-        </div>
-        <div>
+
         <input type="submit" value="add">
         </div>
         </form>

@@ -1,20 +1,18 @@
 from django import forms
 from .models import Comic
-
+from django.forms import TextInput
 
 class NewComicForm(forms.ModelForm):
 
-    first_issue = forms.IntegerField(label='first issue number')
-    last_issue = forms.IntegerField(label='last issue number')
+    first_issue = forms.CharField(label='first issue number', widget=forms.TextInput(attrs={'placeholder': 'first issue'}))
+    last_issue = forms.CharField(label='last issue number', widget=forms.TextInput(attrs={'placeholder': 'last issue'}))
 
     class Meta:
         fields = ['series']
         model = Comic
-        # widgets = forms.TextInput({
-        #     'series': TextInput(attrs={'placeholder': 'series'}),
-        #     'series': TextInput(attrs={'placeholder': 'first issue'}),
-        #     'series': TextInput(attrs={'placeholder': 'last issue'}),
-        # })
+        widgets = {
+            'series': TextInput(attrs={'placeholder': 'series'})
+        }
 # class manuel_comic_entry(forms.ModelForm):
 #
 #     series = forms.CharField(max_length=200)
