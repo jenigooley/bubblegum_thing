@@ -10,7 +10,11 @@ class NewComicForm(forms.ModelForm):
     class Meta:
         fields = ['series']
         model = Comic
-
+        # widgets = forms.TextInput({
+        #     'series': TextInput(attrs={'placeholder': 'series'}),
+        #     'series': TextInput(attrs={'placeholder': 'first issue'}),
+        #     'series': TextInput(attrs={'placeholder': 'last issue'}),
+        # })
 # class manuel_comic_entry(forms.ModelForm):
 #
 #     series = forms.CharField(max_length=200)

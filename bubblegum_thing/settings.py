@@ -25,7 +25,7 @@ SECRET_KEY = '!-0_!j6q9xx6$mmvuq46m)_c^2hrk2sb_c=yzy^kip4w4p!jqo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['104.131.187.84']
 
 
 # Application definition
@@ -138,3 +138,5 @@ STATIC_URL = '/static/'
 SITE_ID = 3
 
 LOGIN_REDIRECT_URL = '/comics/add'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+ACCOUNT_LOGOUT_ON_GET  = True

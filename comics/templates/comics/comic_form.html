@@ -24,26 +24,26 @@
                 font-family: 'Poppins', sans-serif;
             }
 
-            input[type="text"],
-            input[type="number"],
-            input[type="submit"],
-            textarea {
+            input {
                 -moz-appearance: none;
                 -webkit-appearance: none;
                 border: 1px solid #ddd;
             }
 
-            input[type="text"],
-            input[type="number"],
-            input[type="submit"],
-            textarea:focus {
+            input:focus {
                 border: 1px solid #ccc;
                 box-shadow: none !important;
                 outline: none !important;
             }
 
+            input[type=number]::-webkit-inner-spin-button,
+            input[type=number]::-webkit-outer-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+            }
+
             .login-body {
-                background-color:#EEE0E5;
+                background-color:#D6D6D6
             }
 
             .pull-right {
@@ -59,57 +59,47 @@
             }
 
 		 .formbox {
-                display: block;
-                align-items: center;
-                text-align: center;
+                display: flex;
+                align-items: flex-start;
                 border-radius: 25px;
                 margin:30px;
 
 
             }
 
-            input[type="text"]{
+            input{
                 padding: 10px;
-                border: solid 5px #c9c9c9;
-                box-shadow: inset 0 0 0 1px #707070;
-                transition: box-shadow 0.3s, border 0.3s;
+                margin: 10px;
+                background-color: transparent;
+                border: none;
+                border-bottom: solid 3px #c9c9c9;
+                transition: bottom-border 0.3s;
             }
-            input[type="text"]:focus,
-            input[type="text"].focus {
-                border: solid 5px #8B7B8B;
-            }
-
+/*
             input[type="number"]{
                 padding: 10px;
-                border: solid 5px #c9c9c9;
-                box-shadow: inset 0 0 0 1px #707070;
-                transition: box-shadow 0.3s, border 0.3s;
+                background-color: transparent;
+                border: none;
+                border-bottom: : solid 3px #c9c9c9;
+                transition: border 0.3s;
             }
 
             input[type="number"]:focus,
             input[type="number"].focus {
-                border: solid 5px #8B7B8B;
-            }
+                border-bottom: : solid 5px #8B7B8B;
+            }*/
 
             input[type="submit"]{
                  padding: 10px;
                  border: solid 5px #c9c9c9;
                  box-shadow: inset 0 0 0 1px #A2B5CD;
-                 transition: box-shadow 0.3s, border 0.3s;
+                 transition:  border 0.3s;
             }
 
             input[type="submit"]:focus,
             input[type="submit"].focus {
                 border: solid 5px #473C8B;
             }
-
-		    input{
-                text-align: center;
-                padding: 10px;
-                border-radius: 2px;
-                margin: 8px 0;
-                box-sizing: border-box;
-                }
 
 
             .flex-container {
@@ -243,23 +233,22 @@
 
         <form action="/comics/add/" method="post">
         {% csrf_token %}
-        <form action="/comics/add/" method="post">
-        <div >
-        <input type="text" placeholder="series">
+
+        <div>
+        <label for="{{ form.series.id_for_label }}">series</label>
+        {{ form.series }}
         </div>
         <div>
-        <input type="number" placeholder="first issue">
-        <input type="number" placeholder="last issue">
+         <label for="{{ form.first_issue.id_for_label }}">first issue</label>
+        {{ form.first_issue }}
+        </div>
+        <div>
+        <label for="{{ form.last_issue.id_for_label }}">last issue</label>
+        {{form.last_issue }}
         </div>
         <div>
         <input type="submit" value="add">
         </div>
-        <br>
-        <br>
-    <!-- <div class="form-group">
-    <label for="exampleInputFile">File input</label>
-    <input type="file" id="exampleInputFile">
-    </div> -->
         </form>
     </div>
 
