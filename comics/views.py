@@ -47,11 +47,11 @@ class ComicAdd(CreateView):
         if form.is_valid():
             data = form.cleaned_data
             first = data['first_issue']
-            last = data['last_issue'] + 1
+            last = int(data['last_issue']) + 1
             del data['first_issue']
             del data['last_issue']
 
-        for num in range(first, last):
+        for num in range(int(first), int(last)):
             add_one = comic_vine_api.main(data, num)
             org_result = {k: v for k, v in add_one.items()}
             if add_one.get('publisher'):
