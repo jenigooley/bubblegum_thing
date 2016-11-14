@@ -23,7 +23,7 @@
         <form action="/comics/add/" method="post">
         {% csrf_token %}
 
-        <div>
+        <span>
         {{ form.series }}
 
         {{ form.first_issue }}
@@ -31,16 +31,19 @@
         {{form.last_issue }}
 
         <input type="submit" value="add">
-        </div>
         </form>
+        </span>
     </div>
     </div>
+
         <div class="flex-container">
 
             <!-- <div id='outer_box'> -->
-
+<div id="gallerycontainer">
+ <div id="gallery">
                 {% for comic in view.get_queryset %}
                 <div class='image_box'>
+
                     <div class='card'>
                         <div class='card effect__click'>
                             <div class='card__front'>
@@ -64,15 +67,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                </div>
                 <!-- </div> -->
                 {% endfor %}
-
+    </div>
+  </div>
                     </div>
 
-        <div class='footer'>
+        <!-- <div class='footer'>
             a bubblegum the kid production
-        </div>
+        </div> -->
         {% else %}
         <a href="/accounts/login/" class="pull-right">Login</a>
         {% endif %}

@@ -53,26 +53,26 @@
 
             .headline {
                 padding: 0;
-                display: block;
+                margin-bottom: 0;
+                display: inline-flex;
                 background-image: url(/static/images/concrete_wall.jpg);
-
+                height: 100px;
                 align-items: center;
-                text-align: center;
+                text-align: left;
                 color: hotpink;
-                font-weight:900;
-                font-size: 50px;
+                font-weight:600;
+                font-size: 30px;
                 text-shadow: 1px 1px 3px #000;
             }
 
 		 .formbox {
                 padding: 0;
-                margin: 0;
-                display: flex;
-                justify-content: center;;
-                text-align: center;
+                display: inherit;
+                text-align: right;;
                 color: #333333;
                 border-radius: 25px;
-                margin:30px;
+                margin:0px;
+                height: 30px;
 
             }
 
@@ -121,6 +121,24 @@
                 flex: 1 100%;
             }*/
 
+            #gallerycontainer {
+                  position: relative;
+                  height: 100%;
+                  width: 100%;
+                  margin: 0 auto;
+                  overflow: auto;
+             }
+
+            #gallery {
+                width: 4520px;
+                position: absolute;
+                z-index: 1;
+            }
+                #gallery a {
+            	  float: left;
+            	  margin-right: 5px;
+              	  border: 1px solid #000;
+            	}
             .detail {
                 padding: 10px;
                 margin: 10px;
