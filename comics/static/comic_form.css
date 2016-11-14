@@ -12,6 +12,9 @@
                 padding:0px;
                 border:0px;
                 color: plum;
+                font-weight: bolder;
+                text-shadow: 1px 1px 3px #000;
+                font-kerning: 0px;
                 font-family: 'Poppins', sans-serif;
             }
 
@@ -34,7 +37,13 @@
             }
 
             .login-body {
-                background-color:#D6D6D6
+                background-image: url(/static/images/chewed_gum.jpg);
+                position: sticky;
+                top: 0;
+                left: 0;
+                /*Preserve aspet ratio */*/
+                min-width: 100%;
+                min-height: 100%;
             }
 
             .pull-right {
@@ -43,35 +52,46 @@
             }
 
             .headline {
+                padding: 0;
                 display: block;
+                background-image: url(/static/images/concrete_wall.jpg);
+
                 align-items: center;
                 text-align: center;
-                color: #6E7B8B;
+                color: hotpink;
+                font-weight:900;
+                font-size: 50px;
+                text-shadow: 1px 1px 3px #000;
             }
 
 		 .formbox {
+                padding: 0;
+                margin: 0;
                 display: flex;
-
-              justify-content: center;;
+                justify-content: center;;
                 text-align: center;
+                color: #333333;
                 border-radius: 25px;
                 margin:30px;
+
             }
 
             input{
                 padding: 10px;
                 margin: 10px;
                 background-color: transparent;
+                font-weight: bold;
+                text-shadow: none;
                 border: none;
-                border-bottom: solid 3px #c9c9c9;
+                border-bottom: solid 3px #8E8E8E;
                 transition: bottom-border 0.3s;
             }
 
 
             input[type="submit"]{
                  padding: 10px;
-                 border: solid 5px #c9c9c9;
-                 box-shadow: inset 0 0 0 1px #A2B5CD;
+                 color: #8E8E8E;
+                 border: solid 5px #8E8E8E;
                  transition:  border 0.3s;
             }
 
@@ -106,9 +126,7 @@
                 margin: 10px;
                 display: inline-block;
                 align-items: center;
-                height: 500px;
                 color: #282828;
-                background-image: url(concrete_wall.jpg);
                 border-radius: 5px;
 
             }
@@ -119,7 +137,7 @@
                 padding-bottom: 0%;
                 width: 100%;
                 text-align: center;
-                background-color: gainsboro;
+                background-image: url(/static/images/concrete_wall.jpg);
             }
 
             .card__front,
@@ -142,7 +160,7 @@
             }*/
 
             .card__back {
-                background-color: gray;
+
                 font-family: 'Poppins', sans-serif;
                 -webkit-transform: rotateY(-180deg);
                 transform: rotateY(-180deg);

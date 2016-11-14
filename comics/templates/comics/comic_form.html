@@ -1,16 +1,10 @@
-<!DOCTYPE HTML>
 <html>
 <head>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Poppins|Raleway|Titillium+Web|Ubuntu" rel="stylesheet">
 <title>{% if request.user.is_authenticated %}Logged In{% else %}Not Logged In{% endif %}</title>
     {% csrf_token %}
     {% load staticfiles %}
-
-
-
- <link rel="stylesheet" type="text/css" href="/static/comic_form.css">
-
-
+<link rel="stylesheet" type="text/css" href="/static/comic_form.css">
 </head>
 
 <header>
@@ -23,7 +17,7 @@
 <body class = "{% if request.user.is_authenticated %}login-body{% else %}logged-out{% endif %}">
     <div class= "headline">
         <h1> Stick Your Comics Here. </h1>
-    </div>
+
     <div class= "formbox">
 
         <form action="/comics/add/" method="post">
@@ -40,7 +34,7 @@
         </div>
         </form>
     </div>
-
+    </div>
         <div class="flex-container">
 
             <!-- <div id='outer_box'> -->
@@ -74,7 +68,7 @@
                 <!-- </div> -->
                 {% endfor %}
 
-            </div>
+                    </div>
 
         <div class='footer'>
             a bubblegum the kid production
@@ -145,5 +139,8 @@ function move(inc){
     box.style.left = (x_pos+inc) + 'px';
 }
 </script>
+
+
+
 </body>
 </html>
