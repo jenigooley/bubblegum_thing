@@ -39,7 +39,6 @@ class ComicAdd(CreateView):
     template_name = 'comics/comic_form.html'
 
     def get_queryset(self):
-        print list(UserComic.get_collection_data(self.request.user.id))
         return list(UserComic.get_collection_data(self.request.user.id))
 
     def form_valid(self, form):
