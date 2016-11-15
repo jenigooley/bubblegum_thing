@@ -51,12 +51,22 @@
                 color: plum
             }
 
-            .headline {
+            .banner_flex_container {
+                display: flex-container;
+                display: -webkit-flex;
+                flex-wrap: wrap;
+                width:100%;
+                 -webkit-flex-direction: row;
+                flex-direction: row;
                 padding: 0;
                 margin-bottom: 0;
                 display: inline-flex;
                 background-image: url(/static/images/concrete_wall.jpg);
                 height: 100px;
+            }
+
+            .headline {
+                display: inline-flex;
                 align-items: center;
                 text-align: left;
                 color: hotpink;

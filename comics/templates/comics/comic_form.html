@@ -25,8 +25,9 @@
     {% if request.user.profile.account_verified %} (verified) {% else %} (unverified) {% endif %}
 </header>
 <body class = "{% if request.user.is_authenticated %}login-body{% else %}logged-out{% endif %}">
+    <div class="banner_flex_container">
     <div class= "headline">
-        <h1> Stick Your Comics Here. </h1>
+        <h1> Stick Your Comics Here </h1>
 
     <div class= "formbox">
 
@@ -45,7 +46,7 @@
         </span>
     </div>
     </div>
-
+    </div>
         <div class="flex-container">
 
             <!-- <div id='outer_box'> -->
