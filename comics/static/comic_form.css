@@ -38,7 +38,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .login-body {
     background-image: url(/static/images/chewed_gum.jpg);
-    position: sticky;
+    position: static;
     top: 0;
     left: 0;
     /*Preserve aspet ratio */*/
@@ -59,6 +59,7 @@ input[type=number]::-webkit-outer-spin-button {
    width:100%;
     -webkit-flex-direction: row;
    flex-direction: row;
+   position: sticky;
    padding: 0;
    margin-bottom: 10px;
    display: inline-flex;
@@ -137,18 +138,18 @@ input[type="submit"].focus {
     display: -webkit-flex;
     flex-direction: row;
     position: relative;
-
     border-top: 10px;
-     height: 100%;
-     width: 100%;
-     margin: 0 auto;
-     overflow: auto;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    overflow: auto;
 }
 
 .gallery {
     display: inline-flex;
     display: -webkit-flex;
     position: absolute;
+    z-index: 1
 }
 
 .detail {
@@ -222,7 +223,7 @@ input[type="submit"].focus {
     display: inline-flex;
     -webkit-flex-direction: row;
     flex-direction: row;
-    margin: 2px;
+    margin: 1px;
     text-align: center;
     width: 417px;
     height: 640px;
@@ -231,13 +232,4 @@ input[type="submit"].focus {
 .image_sizer {
     width: 417;
     height: 640;
-}
-
-#outer_box {
-        display:inline-flex;;
-        /*flex-direction: row;
-        flex-wrap: wrap;*/
-        /*text-align: center;
-        background-color: #98ff98;
-        position: relative;*/
 }
