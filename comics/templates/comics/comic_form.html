@@ -50,8 +50,8 @@
         <div class="flex-container">
 
             <!-- <div id='outer_box'> -->
-<div id="gallerycontainer">
- <div id="gallery">
+<div class="gallerycontainer">
+ <div class="gallery">
                 {% for comic in view.get_queryset %}
                 <div class='image_box'>
 
@@ -83,36 +83,19 @@
                 {% endfor %}
     </div>
   </div>
-                    </div>
+</div>
 
-        <!-- <div class='footer'>
-            a bubblegum the kid production
-        </div> -->
         {% else %}
         <a href="/accounts/login/" class="pull-right">Login</a>
         {% endif %}
-<<<<<<< HEAD
-=======
 
-<script>
-            (function() {
-                var cards = document.querySelectorAll(".card.effect__click");
-                for ( var i  = 0, len = cards.length; i < len; i++ ) {
-                var card = cards[i];
-               console.log(card)
-            clickListener( card );
-                }
 
-            function clickListener(card) {
-                card.addEventListener( "click", function() {
-                var c = this.classList;
-                c.contains("flipped") === true ? c.remove("flipped") : c.add("flipped");
-                });
-              }
-            })();
-</script>
+</body>
 
->>>>>>> development
+<div class='footer'>
+    a bubblegum the kid production
+</div>
+
 <script>
 (function() {
     var cards = document.querySelectorAll(".card.effect__click");
@@ -131,5 +114,4 @@ function clickListener(card) {
 })();
 </script>
 
-</body>
 </html>
