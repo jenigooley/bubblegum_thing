@@ -137,6 +137,7 @@ input[type="submit"].focus {
     display: -webkit-flex;
     flex-direction: row;
     position: relative;
+
     border-top: 10px;
      height: 100%;
      width: 100%;
@@ -221,6 +222,7 @@ input[type="submit"].focus {
     display: inline-flex;
     -webkit-flex-direction: row;
     flex-direction: row;
+    margin: 2px;
     text-align: center;
     width: 417px;
     height: 640px;
