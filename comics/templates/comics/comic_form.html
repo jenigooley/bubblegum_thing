@@ -16,25 +16,29 @@
     {% csrf_token %}
     {% load staticfiles %}
 </head>
-
-<header>
+<!-- <header>
     {% if request.user.is_authenticated %}
         <a href="/accounts/logout/" class="pull-right">Logout</a>
-        {{ request.user.username }}
+       <div class="pull-left">{{ request.user.username }}</div>
+{% else %}
+<a href="/accounts/login/">Login</a>
+{% endif %}
+</header> -->
 
-    {% if request.user.profile.account_verified %} (verified) {% else %} (unverified) {% endif %}
-</header>
+
+
 <body class = "{% if request.user.is_authenticated %}login-body{% else %}logged-out{% endif %}">
-    <div class="banner_flex_container">
+
+<div class="banner">
     <div class= "headline">
         <h1> Stick Your Comics Here </h1>
-
+    </div>
     <div class= "formbox">
 
         <form action="/comics/add/" method="post">
         {% csrf_token %}
 
-        <span>
+
         {{ form.series }}
 
         {{ form.first_issue }}
@@ -42,12 +46,10 @@
         {{form.last_issue }}
 
         <input type="submit" value="add">
-        </form>
-        </span>
     </div>
     </div>
-    </div>
-        <div class="flex-container">
+<div>
+<div class="flex-container">
 
 
 <div class="gallerycontainer">
@@ -84,17 +86,13 @@
     </div>
   </div>
 </div>
+</div>
 
-        {% else %}
-        <a href="/accounts/login/" class="pull-right">Login</a>
-        {% endif %}
+
 
 
 </body>
 
-<div class='footer'>
-    a bubblegum the kid production
-</div>
 
 <script>
 (function() {

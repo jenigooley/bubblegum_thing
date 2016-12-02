@@ -1,3 +1,6 @@
+div {
+    box-sizing: border-box;
+}
 
 body {
     margin:0px;
@@ -7,16 +10,15 @@ body {
 
 }
 
-header {
+/*header {
     margin:0px;
     padding:0px;
     border:0px;
     color: plum;
     font-weight: bolder;
     text-shadow: 1px 1px 3px #000;
-    font-kerning: 0px;
     font-family: 'Poppins', sans-serif;
-}
+}*/
 
 input {
     -moz-appearance: none;
@@ -37,8 +39,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .login-body {
-    background-image: url(/static/images/chewed_gum.jpg);
-    position: static;
+    background-image: url(/static/images/concrete_wall.jpg);
     top: 0;
     left: 0;
     /*Preserve aspet ratio */*/
@@ -46,45 +47,31 @@ input[type=number]::-webkit-outer-spin-button {
     min-height: 100%;
 }
 
-.pull-right {
-    float:right;
-    color: plum
-}
-
-
-.banner_flex_container {
-   display: flex-container;
-   display: -webkit-flex;
-   flex-wrap: wrap;
-   width:100%;
-    -webkit-flex-direction: row;
-   flex-direction: row;
-   position: sticky;
-   padding: 0;
-   margin-bottom: 10px;
-   display: inline-flex;
-   background-image: url(/static/images/concrete_wall.jpg);
-   height: 100px;
+.banner{
+    height: 30px;
+    width: 100%;
 }
 
 .headline {
-   display: inline-flex;
-   align-items: center;
-   text-align: left;
-   color: hotpink;
-   font-weight:600;
-   font-size: 20px;
-   text-shadow: 1px 1px 3px #000;
+    display: inline-block;
+    height: 100%;
+    width:49%;
+    padding: 40px;
+    color: hotpink;
+    font-weight:300;
+    font-size: 20px;
+    text-shadow: .5px .5px 1px #000;
+    padding-top: 20px;
 }
 
 .formbox {
-   padding: 0;
-   display: inherit;
-   text-align: right;;
-   color: #333333;
-   border-radius: 25px;
-   margin:0px;
-   height: 30px;
+    display:inline-block;
+    text-align: right;
+    height: 100%;
+    width: 49%;
+    color: #333333;
+    margin:0px;
+    height: 20px;
 
 }
 
@@ -113,14 +100,15 @@ input[type="submit"].focus {
 }
 
 
+
 .flex-container {
    display: -webkit-flex;
    display: flex;
    flex-wrap: wrap;
    -webkit-flex-direction: row;
    flex-direction: row;
-   justify-content: center;
-   text-align: center;
+   /*justify-content: center;
+   text-align: center;*/
    font-family: 'Poppins', sans-serif;
    padding: 0px;
    -webkit-flex: 1 100%;
@@ -137,7 +125,8 @@ input[type="submit"].focus {
     display: inline-flex;
     display: -webkit-flex;
     flex-direction: row;
-    position: relative;
+    align-items: center;
+    position: absolute;
     border-top: 10px;
     height: 100%;
     width: 100%;
@@ -162,13 +151,16 @@ input[type="submit"].focus {
 
 }
 
+
+
 .card {
-   position: relative;
-   float: left;
-   padding-bottom: 0%;
-   width: 100%;
-   text-align: center;
-   background-image: url(/static/images/concrete_wall.jpg);
+    position: relative;
+    float: left;
+    padding-bottom: 0%;
+    width: 100%;
+    text-align: center;
+    background-image: url(/static/images/white_squares.jpg);
+
 }
 
 .card__front,
@@ -178,11 +170,11 @@ input[type="submit"].focus {
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: gray;
    -webkit-backface-visibility: hidden;
    backface-visibility: hidden;
    -webkit-transition: -webkit-transform 0.3s;
    transition: transform 0.3s;
+
 }
 /*
 /*
@@ -196,6 +188,7 @@ input[type="submit"].focus {
     font-family: 'Poppins', sans-serif;
     -webkit-transform: rotateY(-180deg);
     transform: rotateY(-180deg);
+
  }
 
 .card.effect__click.flipped .card__front {
@@ -206,30 +199,33 @@ input[type="submit"].focus {
 .card.effect__click.flipped .card__back {
     -webkit-transform: rotateY(0);
     transform: rotateY(0);
-}
-.footer {
-    background-color: pink;
-    position: relative;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: .5rem;
-    text-align: center;
-    font-family: 'Poppins', sans-serif;
 
 }
+
+
+.pull-right {
+    float:right;
+    color: plum;
+}
+
+.pull-left {
+    float:left;
+    color: plum;
+}
+
 .image_box {
     display: -webkit-flex;
     display: inline-flex;
     -webkit-flex-direction: row;
     flex-direction: row;
-    margin: 1px;
+    margin: 20px;
     text-align: center;
-    width: 417px;
-    height: 640px;
+    width: 300px;
+    height: 500px;
+    box-shadow: 0px 5px 20px #CD919E;
 }
 
 .image_sizer {
-    width: 417;
-    height: 640;
+    width: 300;
+    height: 500;
 }
