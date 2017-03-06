@@ -1,37 +1,47 @@
+
+import random
+import string
+
 from django.test import TestCase
 import datetime
 
 from django.utils import timezone
-from django.test import TestCase
+from django.test import Client
 
-from .models import Comic
+from .models import *
+
+import factories
 
 
-class QuestionMethodTests(TestCase):
+# class BaseTestCase(TestCase):
 
-    def test_was_published_recently_with_future_question(self):
-        """
-        was_published_recently() should return False for questions whose
-        pub_date is in the future.
-        """
-        time = timezone.now() + datetime.timedelta(days=30)
-        future_question = Comic(cover_date=time)
-        self.assertIs(future_comic.was_published_recently(), False)
+#     def user(self, name):
+#         user =User.objects.create(username=name)
+#         user.set_password('password')
+#         user.save()
+#         self.user_pk = user.pk
+#         return user
+    
+#     def login(self, pk):
+#         self.client = Client()
+#         user = User.objects.get(pk=pk)
+#         name = user.username
+#         logged_in = self.client.login(username=name, password='password')
+#         self.assertTrue(logged_in)
 
-def test_was_published_recently_with_old_question(self):
-    """
-    was_published_recently() should return False for questions whose
-    pub_date is older than 1 day.
-    """
-    time = timezone.now() - datetime.timedelta(days=30)
-    old_question = Question(pub_date=time)
-    self.assertIs(old_question.was_published_recently(), False)
+#     def comic(self, series):
+#         comic = Comic.objects.create()
+class ComicTestCase(TestCase):
+    def test_if_comic_is_displayed(self):
+        category = factories.ComicFactory.create()
 
-def test_was_published_recently_with_recent_question(self):
-    """
-    was_published_recently() should return True for questions whose
-    pub_date is within the last day.
-    """
-    time = timezone.now() - datetime.timedelta(hours=1)
-    recent_question = Question(pub_date=time)
-    self.assertIs(recent_question.was_published_recently(), True)
+        response = self.client.get('/')
+        self.assertTrue(comic.series in response.content)
+
+
+
+    def test_comic(self):
+        # Get a completely random thing
+        thing = ComicFactory.create()
+        # Test assertions would go here
+        
