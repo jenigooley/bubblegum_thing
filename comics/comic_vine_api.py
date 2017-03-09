@@ -12,7 +12,7 @@ def call_api(series, issue_number):
     #issue_number = str(issue_number)
     payload = {
                 'format': 'json',
-               'api_key': '146a6f54ec76f2792d20444c54a16a0dcdb7b48b',
+               'api_key': '',
                'query': '"' + series + ' ' + issue_number + '"',
                'resources': 'issue, publisher, person'
 }
